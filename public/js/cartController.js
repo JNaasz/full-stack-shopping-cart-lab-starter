@@ -8,6 +8,11 @@ app.controller("cartController", function($scope, cartService) {
         $scope.items = items;
     });
 
+    cartService.getItemTotals().then(function(totals) {
+        $scope.totals = totals;
+        console.log(totals);
+    });
+
     // Function on scope called when form is submitted.
     $scope.addItem = function(item) {
         cartService.addItem(item).then(function() {
@@ -17,6 +22,9 @@ app.controller("cartController", function($scope, cartService) {
             // Update the list with the new set of items.
             cartService.getAllItems().then(function(items) {
                 $scope.items = items;
+
+                // var table = document.getElementsByTagName('table');
+                // table.refresh();
             });
         });
     };
